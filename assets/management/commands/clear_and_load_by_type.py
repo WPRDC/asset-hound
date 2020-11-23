@@ -360,6 +360,7 @@ class Command(BaseCommand):
                                 periodicity=non_blank_value_or_none(row, 'periodicity'),
                                 capacity=non_blank_type_or_none(row, 'capacity', int),
                                 wifi_network=non_blank_value_or_none(row, 'wifi_network'),
+                                wifi_notes=non_blank_value_or_none(row, 'wifi_notes'),
 
                                 etl_notes=non_blank_value_or_none(row, 'notes'),
 

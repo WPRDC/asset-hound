@@ -179,6 +179,7 @@ class BaseAsset(models.Model):
     periodicity = models.CharField(max_length=100, null=True, blank=True)
     capacity = models.IntegerField(null=True, blank=True)
     wifi_network = models.CharField(max_length=100, null=True, blank=True)
+    wifi_notes = models.TextField(null=True, blank=True)
 
     child_friendly = models.BooleanField(null=True, blank=True)
     internet_access = models.BooleanField(null=True, blank=True)
@@ -318,6 +319,7 @@ class Asset(models.Model):
     periodicity = models.CharField(max_length=100, null=True, blank=True)
     capacity = models.IntegerField(null=True, blank=True)
     wifi_network = models.CharField(max_length=100, null=True, blank=True)
+    wifi_notes = models.TextField(null=True, blank=True)
 
     child_friendly = models.BooleanField(null=True, blank=True)
     internet_access = models.BooleanField(null=True, blank=True)

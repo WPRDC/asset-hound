@@ -35,6 +35,7 @@ def to_dict_for_csv(asset: RawAsset):
         'periodicity': asset.periodicity,
         'capacity': asset.capacity,
         'wifi_network': asset.wifi_network,
+        'wifi_notes': asset.wifi_notes,
         'internet_access': asset.internet_access,
         'computers_available': asset.computers_available,
         'accessibility': asset.accessibility,
@@ -73,7 +74,7 @@ class Command(BaseCommand):
             chosen_asset_types = args
             print(f"Dumping just the raw assets of type {chosen_asset_types[0]}.")
             assets_iterator = RawAsset.objects.filter(asset_types__name = chosen_asset_types[0])
-            filename = f'asset_dump_{chosen_asset_types[0]}.csv'
+            filename = f'raw_asset_dump_{chosen_asset_types[0]}.csv'
         else:
             chosen_asset_types = args
             print(f"Dumping just the raw assets of these types: {chosen_asset_types}")
@@ -110,6 +111,7 @@ class Command(BaseCommand):
                  'periodicity',
                  'capacity',
                  'wifi_network',
+                 'wifi_notes',
                  'internet_access',
                  'computers_available',
                  'accessibility',

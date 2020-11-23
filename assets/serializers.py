@@ -107,6 +107,7 @@ class AssetSerializer(serializers.ModelSerializer):
             'accessibility',
             'internet_access',
             'wifi_network',
+            'wifi_notes',
             'computers_available',
             'services',
             'open_to_public',
