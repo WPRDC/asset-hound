@@ -243,6 +243,7 @@ def modify_destination_asset(mode, row, destination_asset, created_new_asset, mo
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'capacity', field_type=int)
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'periodicity', field_type=str)
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'wifi_network', field_type=str)
+    destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'wifi_notes', field_type=str)
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'internet_access', field_type=bool)
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'computers_available', field_type=bool)
     destination_asset, more_results = check_or_update_value(destination_asset, row, mode, more_results, source_field_name = 'accessibility', field_type=bool)
