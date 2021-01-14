@@ -26,7 +26,7 @@ The asset database (defined in [this Django models.py file](https://github.com/W
 The contents of the raw-asset table can then be exported from the database by running
 ```> python manage.py dump_raw_assets```
 
-(Note that load_raw_assets.py currently supports inserts but not yet upserts/updates because the required Asset changes (including reapplying old edits) need to be coded first.)
+(Note that load_raw_assets.py currently supports inserts but not yet upserts/updates because the required Asset changes (including reapplying old edits) need to be coded first. The `synthesized_key` field must be unique to each raw asset. This constraint is currently enforced by the `load_raw_assets` management command.)
 
 ### Creating and editing assets
 The resulting `raw_asset_dump.csv` file is then exported to another computer, where a subset of raw assets may be selected (for instance, all raw assets of a given asset-type (like `restaurants`)). This filtered file is run through a Python script that facilitates finding and merging raw assets. When the script finds sufficiently similar raw assets, it proposes them as duplicates to merge and the lets the user select among conflicting values on a field-by-field basis. The output of this process is what we call a merge-instructions file.
