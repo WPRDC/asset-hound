@@ -21,7 +21,7 @@ The contents of these files are considered to be raw assets.
 
 ### Uploading raw assets to the asset database and then downloading them
 
-The asset database (defined in [this Django models.py file](https://github.com/WPRDC/asset-hound/blob/master/assets/models.py)) has a RawAsset model which is compatible with the schema produced by the `_facet_hound.py` ETL job. To upload a file of raw assets, converted by `_facet_hound.py`, move the file to the assets server (`> sftp all_assets.csv <username>@assets.wprdc.org:<path-to-asset_hound>/raw_assets_to_add.csv`), shell into the Django server, change directories to the Django directory, activate the Django virtual environment (`source env/bin/activate`), and run the RawAsset-loading management command (`> python manage.py load_raw_assets raw_assets_to_add.csv`).
+The asset database (defined in [this Django models.py file](https://github.com/WPRDC/asset-hound/blob/master/assets/models.py)) has a RawAsset model which is compatible with the schema produced by the `_facet_hound.py` ETL job. To upload a file of raw assets, converted by `_facet_hound.py`, move the file to the assets server (`> scp all_assets.csv <username>@assets.wprdc.org:<path-to-asset_hound>/raw_assets_to_add.csv`), shell into the Django server, change directories to the Django directory, activate the Django virtual environment (`source env/bin/activate`), and run the RawAsset-loading management command (`> python manage.py load_raw_assets raw_assets_to_add.csv`).
 
 The contents of the raw-asset table can then be exported from the database by running
 ```> python manage.py dump_raw_assets```
