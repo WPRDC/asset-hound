@@ -13,7 +13,7 @@ const prefersDarkMode =
   window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 export const initialState = {
-  colorScheme: 'light',
+  colorScheme: prefersDarkMode ? 'dark' : 'light',
 };
 
 /* eslint-disable default-case, no-param-reassign */
