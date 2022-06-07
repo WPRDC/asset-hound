@@ -1,7 +1,6 @@
 export const basemaps = {
   dark: 'mapbox://styles/stevendsaylor/ckd6iq0n702if1inv6rbbq5bg', // Basic/Dark
-  light: 'mapbox://styles/stevendsaylor/ckd6ixslm00461iqqn1hltgs8', // Basic/Light
-  streets: 'mapbox://styles/mapbox/streets-v11',
+  light: 'mapbox://styles/mapbox/streets-v11', // Basic/Light
 };
 
 export const DEFAULT_VIEWPORT = {
