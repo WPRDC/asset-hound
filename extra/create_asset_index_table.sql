@@ -107,7 +107,7 @@ SELECT *,
     (SELECT title
         FROM AssetTypeTitle
         WHERE id = asset_type) AS asset_type_title
-FROM (SELECT _id                                                         as id,
+FROM (SELECT asset_id                                                         as id,
              name,
              asset_type,
              (SELECT category FROM Categories WHERE a_type = asset_type) AS category,
