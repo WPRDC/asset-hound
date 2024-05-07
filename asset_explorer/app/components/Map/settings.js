@@ -70,7 +70,7 @@ const colorExpression = colorScheme => [
 const assetLayer = colorScheme => ({
   id: 'asset-points',
   source: 'assets',
-  'source-layer': 'assets',
+  'source-layer': 'table.asset_index._geom',
   type: 'circle',
   paint: {
     'circle-radius': [

@@ -16,8 +16,8 @@ import PropTypes from 'prop-types';
 
 import styled from 'styled-components';
 import { MAPBOX_API_TOKEN } from '../../settings';
-import { DEFAULT_VIEWPORT, basemaps, CARTO_SQL, getTheme } from './settings';
-import { extractFeatureFromEvent, fetchCartoVectorSource } from './utils';
+import { DEFAULT_VIEWPORT, basemaps, getTheme } from './settings';
+import { extractFeatureFromEvent } from './utils';
 import { categorySchema } from '../../schemas';
 import PopUp from './PopUp';
 import Legend from './Legend';
@@ -48,23 +48,13 @@ function Map({
   const startingViewport = { ...DEFAULT_VIEWPORT, ...defaultViewport };
 
   // Internal state
-  const [assetSource, setAssetSource] = useState(undefined);
   const [viewport, setViewport] = useState(startingViewport);
   const [popup, setPopup] = useState(undefined);
-  const [popupFeature, setPopupFeature] = useState(undefined);
   const [assetLayerFilter, setAssetLayerFilter] = useState(['has', 'name']);
 
   // Theming
   const mapStyle = basemaps[colorScheme];
   const { categoryColors, assetLayer } = getTheme(colorScheme);
-
-  useEffect(() => {
-    fetchCartoVectorSource(
-      'assets',
-      CARTO_SQL,
-      // eslint-disable-next-line no-console
-    ).then(setAssetSource, err => console.error('CARTO', err));
-  }, []);
 
   useEffect(() => {
     if (searchTerm) {
@@ -79,14 +69,12 @@ function Map({
   }, [searchTerm, filter]);
 
   function closePopup() {
-    setPopupFeature(undefined);
     setPopup(undefined);
   }
 
   function handleHover(event) {
     const feature = extractFeatureFromEvent(event);
-    if (feature && feature.properties.id !== popupFeature) {
-      setPopupFeature(feature.properties.id);
+    if (feature) {
       const [lng, lat] = event.lngLat;
       setPopup(
         <PopUp
@@ -101,12 +89,12 @@ function Map({
     }
     if (!feature) {
       setPopup(undefined);
-      setPopupFeature(undefined);
     }
   }
 
   function handleClick(event) {
     const feature = extractFeatureFromEvent(event);
+    console.log(feature.properties, feature.properties.id);
     if (feature) {
       onAssetClick(feature.properties.id);
     }
@@ -124,11 +112,13 @@ function Map({
       onClick={handleClick}
       interactiveLayerIds={['asset-points']}
     >
-      {!!assetSource && (
-        <Source {...assetSource}>
-          <Layer {...assetLayer} filter={assetLayerFilter} />
-        </Source>
-      )}
+      <Source
+        id="assets"
+        type="vector"
+        url="https://data.wprdc.org/tiles/table.asset_index._geom"
+      >
+        <Layer {...assetLayer} filter={assetLayerFilter} />
+      </Source>
 
       {sources.map(source => (
         <Source {...source} />
@@ -141,10 +131,15 @@ function Map({
       {children /* todo: ¿tightly define what goes in the map? */}
 
       {popup}
+
       {!!categories && (
-        <Legend colors={categoryColors} categories={categories} backgroundColor="gray-500" />
+        <Legend
+          colors={categoryColors}
+          categories={categories}
+          backgroundColor="gray-500"
+        />
       )}
-      <ControlDiv>
+      <ControlDiv style={{ right: 44 }}>
         <NavigationControl />
       </ControlDiv>
     </ReactMapGL>
